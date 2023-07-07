@@ -1,0 +1,45 @@
+﻿body {
+    display: flex;
+    justify-content: space-between;
+}
+
+#controls {
+    width: 40%;
+    height: 80%;
+    margin: 10px;
+    padding: 10px;
+}
+
+#canvasContainer {
+    width: 60%;
+    height: 80%;
+    margin: 10px;
+    padding: 10px;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.input-group label {
+    margin-right: 10px;
+}
+
+.input-group input {
+    margin-left: 10px;
+}
+
+
+#kinematicsControls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#canvas {
+    width: 100%;
+    height: 100%;
+    
+    border: 1px solid black;
+    margin-top: 20px;
+}
