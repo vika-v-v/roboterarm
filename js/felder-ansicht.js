@@ -1,9 +1,5 @@
 let mode = 'vorwaerts';
 
-window.onload = function() {
-    manageFields();
-};
-
 function manageFields(value = mode) {
     document.getElementById("error").style.display = "none";
 
