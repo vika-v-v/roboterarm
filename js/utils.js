@@ -66,8 +66,6 @@ function vorwaertsKinematik(roboterDatenArray1,roboterDatenArray2)
 	roboterDatenArray1[1] = ra1y;
 	roboterDatenArray2[0] = ra2x;
 	roboterDatenArray2[1] = ra2y;
-	
-	console.log(roboterDatenArray1, roboterDatenArray2);
 }
 
 

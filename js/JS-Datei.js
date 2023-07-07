@@ -1,47 +1,4 @@
-class Roboterarm {
-    constructor(l1, w1, p1, l2, w2, p2) {
-        this.l1 = l1;
-        this.w1 = this.setW1(w1);
-        this.p1 = this.setP1(p1);
-        this.l2 = l2;
-        this.w2 = this.setW2(w2);
-        this.p2 = this.setP2(p2);
-    }
 
-    // getters
-    getL1() { return this.l1; }
-    getW1() { return this.w1; }
-    getP1() { return this.p1; }
-    getL2() { return this.l2; }
-    getW2() { return this.w2; }
-    getP2() { return this.p2; }
-
-    // setters
-    setL1(l1) { this.l1 = l1; }
-    setW1(w1) {
-        if(w1 > -90 && w1 < 90) {
-            this.w1 = w1;
-        } else {
-            document.getElementById("error").style.display = "block";
-        }
-    }
-    setP1(p1) { 
-        let position = p1.split("/");
-        this.p1 = [parseFloat(position[0]), parseFloat(position[1])]; 
-    }
-    setL2(l2) { this.l2 = l2; }
-    setW2(w2) {
-        if(w2 > -180 && w2 < 180) {
-            this.w2 = w2;
-        } else {
-            document.getElementById("error").style.display = "block";
-        }
-    }
-    setP2(p2) { 
-        let position = p2.split("/");
-        this.p2 = [parseFloat(position[0]), parseFloat(position[1])]; 
-    }
-}
 
 
 function maleRoboterArm() {
@@ -62,40 +19,45 @@ function maleRoboterArm() {
 
 
 function zeichneRoboterarm(arm) {
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
-    ctx.font = "30px Arial";
-    ctx.fillText("Hello World", 10, 50);
-    /*
-    // Werte aus dem Roboterarm extrahieren
+    // Values extracted from the robot arm
     let l1 = arm.getL1();
-    let w1 = degToRad(arm.getW1());  // Winkel in Radiant umrechnen
+    let w1 = degToRad(arm.getW1()); // Angle in radians
+    let p1 = arm.getP1().split('/'); // Assuming the format is 'x/y'
     let l2 = arm.getL2();
-    let w2 = degToRad(arm.getW2());  // Winkel in Radiant umrechnen
+    let w2 = degToRad(arm.getW2()); // Angle in radians
+    let p2 = arm.getP2().split('/'); // Assuming the format is 'x/y'
 
-    // Kontext des Canvas holen
+    // Get context of the canvas
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
 
-    // Canvas zurücksetzen
+    c.width = c.clientWidth;
+    c.height = c.clientHeight;
+
+    ctx.fillStyle = "yellow";
+    ctx.strokeStyle = "black";
+    // Reset Canvas
     ctx.clearRect(0, 0, c.width, c.height);
 
-    // Position zum Zeichnen der Linien setzen
-    let x = c.width / 2;
-    let y = c.height / 2;
-
-    // Achse 1 zeichnen
+    // Draw P1 circle
     ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x + l1 * Math.sin(w1), y - l1 * Math.cos(w1));  // Winkel und Länge verwenden, um Endpunkt zu bestimmen
+    ctx.arc(parseFloat(p1[0]), parseFloat(p1[1]), 10, 0, 2 * Math.PI);
+    ctx.fill();
     ctx.stroke();
 
-    // Achse 2 zeichnen
+    // Draw P2 circle
     ctx.beginPath();
-    ctx.moveTo(x + l1 * Math.sin(w1), y - l1 * Math.cos(w1));  // Startpunkt ist Endpunkt der Achse 1
-    ctx.lineTo(x + l1 * Math.sin(w1) + l2 * Math.sin(w1 + w2), y - l1 * Math.cos(w1) - l2 * Math.cos(w1 + w2));  // Winkel und Länge verwenden, um Endpunkt zu bestimmen
-    ctx.stroke();*/
+    ctx.arc(parseFloat(p2[0]), parseFloat(p2[1]), 20, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
+
+    // Draw a line from P1 to P2
+    ctx.beginPath();
+    ctx.moveTo(parseFloat(p1[0]), parseFloat(p1[1]));
+    ctx.lineTo(parseFloat(p2[0]), parseFloat(p2[1]));
+    ctx.stroke();
 }
+
 
 
 function degToRad(deg) {
