@@ -8,61 +8,72 @@
         <link rel="stylesheet" type="text/css" href="css/CCS_Datei.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"/>
         
+        <script src="js/felder-ansicht.js" type="text/javascript"> </script>
 	</head>
 	
     <body>
-        <div id="controls">
-            <div id="inputs">
-                <h5>Achse 1</h5>
-                <div class="input-group">
-                    <label for="axis1Length">Achse 1 Länge: </label>
-                    <input type="number" id="axis1Length" min="0" />
+        <div id="top-row">
+            <div id="controls">
+                <div id="inputs">
+                    <h5>Achse 1</h5>
+                    <div class="input-group">
+                        <label for="axis1Length">Achse 1 Länge: </label>
+                        <input type="number" id="axis1Length" min="0" oninput="manageFields()" />
+                    </div>
+                    <div class="input-group">
+                        <label for="axis1Angle">Achse 1 Winkel: </label>
+                        <input type="number" id="axis1Angle" min="0" max="360" oninput="manageFields()" />
+                    </div>
+                    <div class="input-group">
+                        <label for="axis1Position">Achse 1 Position (x/y): </label>
+                        <input type="text" id="axis1Position" />
+                    </div>
+                    <h5>Achse 2</h5>
+                    <div class="input-group">
+                        <label for="axis2Length">Achse 2 Länge: </label>
+                        <input type="number" id="axis2Length" min="0" oninput="manageFields()" />
+                    </div>
+                    <div class="input-group">
+                        <label for="axis2Angle">Achse 2 Winkel: </label>
+                        <input type="number" id="axis2Angle" min="0" max="360" oninput="manageFields()" />
+                    </div>
+                    <div class="input-group">
+                        <label for="axis1Position">Achse 2 Position (x/y): </label>
+                        <input type="text" id="axis2Position" oninput="manageFields()" />
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="axis1Angle">Achse 1 Winkel: </label>
-                    <input type="number" id="axis1Angle" min="0" max="360" />
+                <br/>
+                <div id="kinematicsControls">
+                    <div class="radio-group">
+                        <input type="radio" id="forwardKinematics" name="kinematics" onclick="manageFields('vorwaerts')" checked="true" />
+                        <label for="forwardKinematics">Vorwärtskinematik</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="inverseKinematics" name="kinematics" onclick="manageFields('rueckwaerts')" />
+                        <label for="inverseKinematics">Rückwärtskinematik</label>
+                    </div>
+                    <button id="calculate" onclick="maleRoboterArm()">Berechnung starten</button>
+                    <button id="nextPosition">Nächste Position aus der Tabelle</button>
+                    <button id="previousPosition">Vorherige Position aus der Tabelle</button>
                 </div>
-                <div class="input-group">
-                    <label for="axis1Position">Achse 1 Position (x/y): </label>
-                    <input type="text" id="axis1Position" />
-                </div>
-                <h5>Achse 2</h5>
-                <div class="input-group">
-                    <label for="axis2Length">Achse 2 Länge: </label>
-                    <input type="number" id="axis2Length" min="0" />
-                </div>
-                <div class="input-group">
-                    <label for="axis2Angle">Achse 2 Winkel: </label>
-                    <input type="number" id="axis2Angle" min="0" max="360" />
-                </div>
-                <div class="input-group">
-                    <label for="axis1Position">Achse 2 Position (x/y): </label>
-                    <input type="text" id="axis2Position" />
+                <div id="error" style="display: none;">
+                    <br/>
+                    <h3 class="text-danger">Fehler</h3>
                 </div>
             </div>
-            
+            <div id = "positionsContainer">
+                <table id="positions">
+                    <tr>
+                        <th>Elfi</th>
+                        <th>Position</th>
+                        <th>Aktiv</th>
+                    </tr>
+                </table>
+            </div>
+            <div id="canvasContainer">
+                <canvas id="canvas"></canvas>
+            </div>
         </div>
-        <div id="kinematicsControls">
-            <input type="radio" id="forwardKinematics" name="kinematics" />
-            <label for="forwardKinematics">Vorwärtskinematik</label>
-            <input type="radio" id="inverseKinematics" name="kinematics" />
-            <label for="inverseKinematics">Rückwärtskinematik</label>
-            <button id="calculate" onclick="maleRoboterArm()">Berechnung starten</button>
-            <button id="nextPosition">Nächste Position aus der Tabelle</button>
-            <button id="previousPosition">Vorherige Position aus der Tabelle</button>
-        </div>
-        <table id="positions">
-            <tr>
-                <th>Elfi</th>
-                <th>Position</th>
-                <th>Aktiv</th>
-            </tr>
-        </table>
-
-        <div id="canvasContainer">
-            <canvas id="canvas"></canvas>
-        </div>
-        
     </body>
     
 </html>
