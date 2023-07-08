@@ -24,10 +24,10 @@ function maleRoboterArm() {
 function zeichneRoboterarm(arm) {
     // Values extracted from the robot arm
     let l1 = arm.getL1();
-    let w1 = degToRad(arm.getW1()); // Angle in radians
+    let w1 = arm.getW1();
     let p1 = arm.getP1().split('/'); // Assuming the format is 'x/y'
     let l2 = arm.getL2();
-    let w2 = degToRad(arm.getW2()); // Angle in radians
+    let w2 = arm.getW2();
     let p2 = arm.getP2().split('/'); // Assuming the format is 'x/y'
     let r1 = 10;
     let r2 = 20;
@@ -57,16 +57,17 @@ function zeichneRoboterarm(arm) {
     ctx.fill();
     ctx.stroke();
 
+    // Calculate the second point of the line based on the given angle and length
+    let x2 = parseFloat(p1[0]) + l1 * Math.cos(w1 * Math.PI / 180);
+    let y2 = parseFloat(p1[1]) + l1 * Math.sin(w1 * Math.PI / 180);
+
     // Draw a line from P1 to P2
     ctx.beginPath();
     ctx.moveTo(parseFloat(p1[0]), parseFloat(p1[1]));
-    ctx.lineTo(parseFloat(p2[0]), parseFloat(p2[1]));
+    ctx.lineTo(x2, y2);
     ctx.stroke();
 
-    // Calculate the second point of the line based on the given angle and length
-    let x2 = parseFloat(p1[0]) + l1 * Math.cos(w2);
-    let y2 = parseFloat(p1[1]) + l1 * Math.sin(w2);
-
+    // Draw P3 circle
     ctx.beginPath();
     ctx.arc(x2, y2, r3, 0, 2 * Math.PI);
     ctx.fill();
@@ -77,40 +78,4 @@ function zeichneRoboterarm(arm) {
     ctx.moveTo(parseFloat(p1[0]), parseFloat(p1[1]));
     ctx.lineTo(x2, y2);
     ctx.stroke();
-}
-
-
-
-function erstelleTabelle() {
-    var positionsContainer = document.getElementById('positionsContainer');
-    var table = document.getElementById('positions');
-
-    // Tabelleninhalt erstellen
-    for (var i = 0; i < positionen.length; i++) {
-        var position = positionen[i];
-
-        var row = document.createElement('tr');
-
-        var elfiCell = document.createElement('td');
-        elfiCell.appendChild(document.createTextNode((i + 1)));
-        elfiCell.style.verticalAlign = 'middle'; // Align elements to the middle
-        elfiCell.style.borderBottom = '1px solid black'; // Add a border at the bottom
-        row.appendChild(elfiCell);
-
-        var positionCell = document.createElement('td');
-        positionCell.appendChild(document.createTextNode(position.toString()));
-        positionCell.style.verticalAlign = 'middle'; // Align elements to the middle
-        positionCell.style.borderBottom = '1px solid black'; // Add a border at the bottom
-        row.appendChild(positionCell);
-
-        var aktivCell = document.createElement('td');
-        aktivCell.appendChild(document.createTextNode(i === aktPos ? '<' : ''));
-        aktivCell.style.verticalAlign = 'middle'; // Align elements to the middle
-        aktivCell.style.borderBottom = '1px solid black'; // Add a border at the bottom
-        row.appendChild(aktivCell);
-
-        table.appendChild(row);
-    }
-
-    positionsContainer.appendChild(table);
 }

@@ -19,7 +19,8 @@ function manageFields(value = mode) {
         document.getElementById('axis2Position').disabled = true;
         document.getElementById('axis1Angle').disabled = false;
         document.getElementById('axis2Angle').disabled = false;
-        document.getElementById('inverseKinematics').selected = false;
+        document.getElementById('inverseKinematics').checked = false;
+        document.getElementById('forwardKinematics').checked = true;
 
         data1 = [parseFloat(p1.split('/')[0]) || 0, parseFloat(p1.split('/')[1]) || 0, l1, w1];
         data2 = [parseFloat(p2.split('/')[0]) || 0, parseFloat(p2.split('/')[1]) || 0, l2, w2];
@@ -38,7 +39,8 @@ function manageFields(value = mode) {
         document.getElementById('axis1Angle').disabled = true;
         document.getElementById('axis2Length').disabled = false;
         document.getElementById('axis2Angle').disabled = true;
-        document.getElementById('forwardKinematics').selected = false;
+        document.getElementById('forwardKinematics').checked = false;
+        document.getElementById('inverseKinematics').checked = true;
         
         // Note that the angles are not being used in this mode
         data1 = [parseFloat(p1.split('/')[0]) || 0, parseFloat(p1.split('/')[1]) || 0, l1];

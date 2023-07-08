@@ -10,6 +10,7 @@
         
         <script src="js/felder-ansicht.js" type="text/javascript"> </script>
         <script src="js/roboterarm.js" type="text/javascript"> </script>
+        <script src="js/positionen-tabelle.js" type="text/javascript"> </script>
 	</head>
 	
     <body>
@@ -54,8 +55,8 @@
                         <label for="inverseKinematics">Rückwärtskinematik</label>
                     </div>
                     <button id="calculate" onclick="maleRoboterArm()">Berechnung starten</button>
-                    <button id="nextPosition">Nächste Position aus der Tabelle</button>
-                    <button id="previousPosition">Vorherige Position aus der Tabelle</button>
+                    <button id="nextPosition" onclick="nachstePosition()">Nächste Position aus der Tabelle</button>
+                    <button id="previousPosition" onclick="vorheriegePosition()">Vorherige Position aus der Tabelle</button>
                 </div>
                 <div id="error" style="display: none;">
                     <br/>
