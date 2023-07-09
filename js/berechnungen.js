@@ -3,7 +3,6 @@ let mode = 'vorwaerts';
 function manageFields(value = mode) {
     document.getElementById("error").style.display = "none";
 
-    // Get values from the form
     let l1 = parseFloat(document.getElementById('axis1Length').value);
     let w1 = parseFloat(document.getElementById('axis1Angle').value);
     let l2 = parseFloat(document.getElementById('axis2Length').value);
@@ -42,7 +41,6 @@ function manageFields(value = mode) {
         document.getElementById('forwardKinematics').checked = false;
         document.getElementById('inverseKinematics').checked = true;
         
-        // Note that the angles are not being used in this mode
         data1 = [parseFloat(p1.split('/')[0]) || 0, parseFloat(p1.split('/')[1]) || 0, l1];
         data2 = [parseFloat(p2.split('/')[0]) || 0, parseFloat(p2.split('/')[1]) || 0, l2];
         

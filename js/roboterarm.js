@@ -1,5 +1,6 @@
 class Roboterarm {
     constructor(l1, w1, p1, l2, w2, p2) {
+        document.getElementById("error").style.display = "none";
         this.setL1(l1);
         this.setW1(w1);
         this.setP1(p1);
@@ -8,7 +9,6 @@ class Roboterarm {
         this.setP2(p2);
     }
 
-    // getters
     getL1() { return this.l1; }
     getW1() { return this.w1; }
     getP1() { return this.p1.join('/'); }
@@ -20,26 +20,43 @@ class Roboterarm {
     getP2x() { return this.p2[0]; }
     getP2y() { return this.p2[1]; }
 
-    // setters
-    setL1(l1) { this.l1 = isNaN(parseFloat(l1)) ? 0 : parseFloat(l1); }
+    setL1(l1) { 
+        if(isNaN(parseFloat(l1)) || parseFloat(l1) < 0 || parseFloat(l1) >= 500) {
+            document.getElementById("error").style.display = "block";
+        } else {
+            this.l1 = parseFloat(l1); 
+        }
+    }
+
     setW1(w1) {
         w1 = w1 ?? 0;
         if(w1 > -90 && w1 < 90) {
             this.w1 = w1;
-        } else {
+        } 
+        else {
             document.getElementById("error").style.display = "block";
             this.w1 = 0;
         }
     }
+
     setP1(p1) { 
         if (!p1) {
+            document.getElementById("error").style.display = "block";
             this.p1 = [0, 0];
         } else {
             let position = p1.split("/");
             this.p1 = [parseFloat(position[0]) || 0, parseFloat(position[1]) || 0]; 
         }
     }
-    setL2(l2) { this.l2 = isNaN(parseFloat(l2)) ? 0 : parseFloat(l2); }
+
+    setL2(l2) { 
+        if(isNaN(parseFloat(l2)) || parseFloat(l2) < 0 || parseFloat(l2) >= 500) {
+            document.getElementById("error").style.display = "block";
+        } else {
+            this.l2 = parseFloat(l2); 
+        }
+    }
+
     setW2(w2) {
         w2 = w2 ?? 0;
         if(w2 > -180 && w2 < 180) {
@@ -49,8 +66,10 @@ class Roboterarm {
             this.w2 = 0;
         }
     }
+
     setP2(p2) { 
         if (!p2) {
+            document.getElementById("error").style.display = "block";
             this.p2 = [0, 0];
         } else {
             let position = p2.split("/");
