@@ -1,13 +1,25 @@
-# Anmerkung zur Struktur:
-Die css Datei heißt CCS_Datei.css, bei Bedarf muss zu CSS_Datei.css unbenannt werden und in der Zeile 8 muss die Referenz updated werden
-Die Struktur war am Anfang nicht korrekt, es war die Referenz: <script src="./JS-Datei.js" type="text/javascript"> </script>; Der Pfad der Datei ist aber nicht "./JS-Datei.js", sondern "js/JS-Datei.js" das wird in der Zeile 7 updated
+# Allgemein
+Dieses Projekt bietet eine interaktive Simulation eines zweidimensionalen Roboterarms. Benutzer können die Länge und den Winkel jeder Achse ändern und die resultierenden Positionen in Echtzeit visualisieren.
 
-Die Namen sind unkonventionel und werden eher selten benutzt. Normalerweise würde die Datei "Kinematikrechner.xhtml" als "index,xhtml" bezeichnet und "CCS_Datei.css" als "styles.css". Kann bei Bedarf in oben genannten Zeilen updatet werden. 
+# Struktur
+Die Kernkomponente dieses Projekts ist die Kinematikrechner.xhtml Datei, die als Hauptseite der Webanwendung fungiert. Sie enthält grundlegende HTML-Strukturen und verweist auf mehrere JavaScript- und CSS-Dateien, die zur Funktionalität und Darstellung der Anwendung beitragen. Diese Dateien sind:
 
-# Anmerkung zu Stilen: Bootstrap ist eingebunden um den Ansicht schöner zu machen
-Bootstrap ist mit einem Link-Tag in der Zeile 9 eingebunden, kann bei Bedarf gelöscht werden
+JavaScript-Dateien:
+    js/JS-Datei.js
+    js/utils.js
+    js/berechnungen.js
+    js/roboterarm.js
+    js/positionen-tabelle.js
+    js/malen.js
+CSS-Datei:
+    css/CCS_Datei.css
 
-# Anmerkung zu dem Code:
-    - Roboterarm-Klasse
-    Verkürzungen von Variablen werden benutzt
-    Wenn throw new Error("W1 muss zwischen -90 und 90 sein."); nicht zu benutzen ist, kann durch eine console.write("Error") ersetzt werden.
+# Anmerkungen zur Struktur
+Die aktuell verwendete CSS-Datei trägt den Namen CCS_Datei.css. Wenn eine Umbenennung in CSS_Datei.css gewünscht wird, muss die Referenz in Zeile 8 von Kinematikrechner.xhtml entsprechend angepasst werden.
+
+Die JavaScript-Datei JS-Datei.js wurde ursprünglich mit einem falschen Pfad referenziert (./JS-Datei.js). Dieser Fehler wurde behoben und der korrekte Pfad (js/JS-Datei.js) wird in Zeile 10 von Kinematikrechner.xhtml verwendet.
+
+Die verwendeten Dateinamen sind unkonventionell. Üblicherweise würde man die Datei Kinematikrechner.xhtml als index.xhtml und CCS_Datei.css als styles.css bezeichnen. Bei Bedarf können Sie die Dateinamen ändern und die Verweise in Kinematikrechner.xhtml entsprechend aktualisieren.
+
+# Anmerkung zu Stilen
+Bootstrap ist in Zeile 9 von Kinematikrechner.xhtml eingebunden. Falls nicht benötigt, kann es entfernt werden.
