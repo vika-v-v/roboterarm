@@ -45,9 +45,9 @@ function nachstePosition() {
         var pos = positionen[aktPos];
         //document.getElementById('axis1Position').value = pos.x + "/" + pos.y;
         document.getElementById('axis2Position').value = pos.x + "/" + pos.y;
-
+        
+        manageFields("rueckwaerts");
         maleRoboterArm();
-        manageFields();
     }
 }
 
@@ -62,7 +62,7 @@ function vorheriegePosition() {
         //document.getElementById('axis1Position').value = pos.x + "/" + pos.y;
         document.getElementById('axis2Position').value = pos.x + "/" + pos.y;
 
+        manageFields("rueckwaerts");
         maleRoboterArm();
-        manageFields();
     }
 }
