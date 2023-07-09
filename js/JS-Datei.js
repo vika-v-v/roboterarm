@@ -47,15 +47,19 @@ function zeichneRoboterarm() {
     ctx.fillStyle = "yellow";
     ctx.strokeStyle = "black";
 
-    maleTrapezien();
+    maleTrapezien(c.width / 2, c.height / 2, arm.getP1x(), arm.getP1y(), r1);
+    maleLinien(c.width / 2, c.height / 2, arm.getP1x(), arm.getP1y());
+
+    maleTrapezien(arm.getP1x(), arm.getP1y(), arm.getP2x(), arm.getP2y(), r2);
+    maleLinien(arm.getP1x(), arm.getP1y(), arm.getP2x(), arm.getP2y());
+
     maleKreisen();
-    maleLinien();
 }
 
 function maleKreisen() {
     // Draw R3 circle at the bottom left
     ctx.beginPath();
-    ctx.arc(r3 + 100, c.height - r3 - 100, r3, 0, 2 * Math.PI);
+    ctx.arc(c.width / 2, c.height / 2, r3, 0, 2 * Math.PI);
     ctx.fill();
     ctx.stroke();
 
@@ -72,36 +76,32 @@ function maleKreisen() {
     ctx.stroke();
 }
 
-function maleLinien() {
+function maleLinien(x1, y1, x2, y2) {
     ctx.beginPath();
-    ctx.moveTo(r3 + 100, c.height - r3 - 100);
-    ctx.lineTo(arm.getP1x(), arm.getP1y());
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(arm.getP1x(), arm.getP1y());
-    ctx.lineTo(arm.getP2x(), arm.getP2y());
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
     ctx.stroke();
 }
 
-function maleTrapezien() {
-    let h = r2;
+function maleTrapezien(x1, y1, x2, y2, h) {
+    
+    // Calculate direction vector of the arm and normalize it
+    let dx = x2 - x1;
+    let dy = y2 - y1;
+    let len = Math.sqrt(dx*dx + dy*dy);
+    dx /= len;
+    dy /= len;
+
+    // Rotate the direction vector by 90 degrees to get a perpendicular vector
+    let perp_dx = -dy;
+    let perp_dy = dx;
 
     ctx.beginPath();
-    ctx.moveTo(arm.getP1x(), arm.getP1y() + h); // Obere linke Ecke
-    ctx.lineTo(arm.getP2x(), arm.getP2y() + h); // Obere rechte Ecke
-    ctx.lineTo(arm.getP2x(), arm.getP2y() - h); // Untere rechte Ecke
-    ctx.lineTo(arm.getP1x(), arm.getP1y() - h); // Untere linke Ecke
-    ctx.closePath(); // Schließen Sie den Pfad
+    ctx.moveTo(x1 + h*perp_dx, y1 + h*perp_dy); // Upper left corner
+    ctx.lineTo(x2 + h*perp_dx, y2 + h*perp_dy); // Upper right corner
+    ctx.lineTo(x2 - h*perp_dx, y2 - h*perp_dy); // Lower right corner
+    ctx.lineTo(x1 - h*perp_dx, y1 - h*perp_dy); // Lower left corner
+    ctx.closePath(); // Close the path
     ctx.fill();
-    ctx.stroke(); // Zeichnen Sie das Trapez
-
-    ctx.beginPath();
-    ctx.moveTo(arm.getP1x(), arm.getP1y() + h); // Obere linke Ecke
-    ctx.lineTo(r3 + 100, c.height - r3 - 100 + h); // Obere rechte Ecke
-    ctx.lineTo(r3 + 100, c.height - r3 - 100 - h); // Untere rechte Ecke
-    ctx.lineTo(arm.getP1x(), arm.getP1y() - h); // Untere linke Ecke
-    ctx.closePath(); // Schließen Sie den Pfad
-    ctx.fill();
-    ctx.stroke(); // Zeichnen Sie das Trapez
+    ctx.stroke(); // Draw the trapezoid
 }

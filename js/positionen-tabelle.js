@@ -43,7 +43,6 @@ function nachstePosition() {
         aktivZellen[aktPos].textContent = '<';
 
         var pos = positionen[aktPos];
-        //document.getElementById('axis1Position').value = pos.x + "/" + pos.y;
         document.getElementById('axis2Position').value = pos.x + "/" + pos.y;
         
         manageFields("rueckwaerts");
@@ -59,9 +58,8 @@ function vorheriegePosition() {
         aktivZellen[aktPos].textContent = '<';
 
         var pos = positionen[aktPos];
-        //document.getElementById('axis1Position').value = pos.x + "/" + pos.y;
         document.getElementById('axis2Position').value = pos.x + "/" + pos.y;
-
+        
         manageFields("rueckwaerts");
         maleRoboterArm();
     }

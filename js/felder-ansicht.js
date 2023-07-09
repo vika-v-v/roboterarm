@@ -50,6 +50,7 @@ function manageFields(value = mode) {
 
         let ra = new Roboterarm(data1[2], data1[1], data1[0] + "/" + data1[1], data2[2], data2[1], data2[0] + "/" + data2[1]);
 
+        document.getElementById('axis1Position').value = ra.getP1();
         document.getElementById('axis1Angle').value = ra.getW1();
         document.getElementById('axis2Angle').value = ra.getW2();
     }
