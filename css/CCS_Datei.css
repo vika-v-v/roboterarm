@@ -1,15 +1,18 @@
-﻿body {
+﻿/* definieren allgemeine layouteinstellungen für den gesamten körper */
+body {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#top-row {
+/* definieren layout für den hauptcontainer */
+#main-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
+/* definieren die größe und das aussehen des steuerungscontainers */
 #controls {
     width: 30%;
     height: auto;
@@ -17,6 +20,7 @@
     padding: 10px;
 }
 
+/* definieren die größe und das aussehen des canvas-containers */
 #canvasContainer {
     width: 45%;
     aspect-ratio: 1 / 1;
@@ -24,6 +28,7 @@
     padding: 10px;
 }
 
+/* definieren die größe und das aussehen des positionscontainers */
 #positionsContainer {
     width: 20%;
     height: auto;
@@ -31,43 +36,50 @@
     padding: 10px;
 }
 
+/* hinzufügen eines abstands unten für jede eingabegruppe */
 .input-group {
     margin-bottom: 10px;
 }
 
+/* definieren den abstand rechts für jedes label innerhalb einer eingabegruppe */
 .input-group label {
     margin-right: 10px;
 }
 
+/* definieren den abstand links für jedes eingabefeld innerhalb einer eingabegruppe */
 .input-group input {
     margin-left: 10px;
 }
 
+/* definieren layout für kinematik-steuerungscontainer */
 #kinematicsControls {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Adjust as necessary */
+    gap: 10px; /* anpassung nach bedarf */
     align-items: flex-start;
     justify-content: space-between;
 }
 
+/* definieren layout für jede radiogruppe */
 .radio-group {
     display: flex;
     align-items: center;
 }
 
+/* definieren den abstand links und rechts für jedes element innerhalb einer radiogruppe */
 .radio-group * {
     margin-left: 3px;
     margin-right: 3px;
 }
 
-
+/* definieren die größe und das aussehen der positionstabelle */
 #positions {
-    width: 80%;  /* or any other value you prefer */
-    margin: 10px auto;  /* auto will center the table */
+    width: 80%;  /* oder jede andere bevorzugte größe */
+    margin: 10px auto;  /* auto zentriert die tabelle */
     padding: 10px;
 }
 
+/* definieren die größe und das aussehen des canvas */
 #canvas {
     width: 100%;
     height: 100%;
@@ -75,3 +87,14 @@
     margin-top: 20px;
 }
 
+/* definieren das aussehen für jede zelle in der positionstabelle */
+#positions td, #positions th {
+    border: 1px solid #ddd;
+    padding: 6px;
+    text-align: center;
+}
+
+/* hinzufügen eines hover-effekts für jede zeile in der positionstabelle */
+#positions tr:hover {
+    background-color: #ddd;
+}

@@ -1,30 +1,29 @@
-var aktivZellen = [];
+var aktivZellen = []; // initialisiere ein leeres array für aktive zellen
 
 function erstelleTabelle() {
+    // finde die elementen
     var positionsContainer = document.getElementById('positionsContainer');
     var table = document.getElementById('positions');
 
+    // schleife über alle positionen
     for (var i = 0; i < positionen.length; i++) {
         var position = positionen[i];
 
         var row = document.createElement('tr');
 
-        var elfiCell = document.createElement('td');
-        elfiCell.innerHTML = "<i>" + (i + 1) + " | </i>";
-        elfiCell.style.verticalAlign = 'middle';
-        elfiCell.style.borderBottom = '1px solid black';
-        row.appendChild(elfiCell);
+        // erstelle eine zelle für die nummerierung
+        var numCell = document.createElement('td');
+        numCell.innerHTML = "<i>" + (i + 1) + "</i>";
+        row.appendChild(numCell);
 
+        // erstelle eine zelle für die position
         var positionCell = document.createElement('td');
         positionCell.appendChild(document.createTextNode(position.toString()));
-        positionCell.style.verticalAlign = 'middle';
-        positionCell.style.borderBottom = '1px solid black';
         row.appendChild(positionCell);
 
+        // erstelle eine zelle für das aktiv-symbol
         var aktivCell = document.createElement('td');
         aktivCell.appendChild(document.createTextNode(i === aktPos ? '<' : ''));
-        aktivCell.style.verticalAlign = 'middle';
-        aktivCell.style.borderBottom = '1px solid black';
         row.appendChild(aktivCell);
 
         table.appendChild(row);
@@ -34,6 +33,7 @@ function erstelleTabelle() {
     positionsContainer.appendChild(table);
 }
 
+// funktion zum wechseln zur nächsten position
 function nachstePosition() {
     if(aktPos < positionen.length - 1) {
         aktivZellen[aktPos].textContent = '';
@@ -48,6 +48,7 @@ function nachstePosition() {
     }
 }
 
+// funktion zum wechseln zur vorherigen position
 function vorheriegePosition() {
     if(aktPos > 0) {
         aktivZellen[aktPos].textContent = '';
