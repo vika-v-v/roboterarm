@@ -34,30 +34,39 @@ function erstelleTabelle() {
 }
 
 function nachstePosition() {
+    aktivZellen[aktPos].textContent = '';
+
     if(aktPos < positionen.length - 1) {
         aktPos++;
-        var pos = positionen[aktPos];
-        
-        aktivZellen[aktPos - 1].textContent = '';
-        aktivZellen[aktPos].textContent = '<';
-        document.getElementById('axis2Position').value = pos.x + "/" + pos.y;
-        
-        manageFields("rueckwaerts");
-        maleRoboterArm();
     }
+    else {
+        aktPos = 0;
+    }
+
+    var pos = positionen[aktPos];
+        
+    
+    aktivZellen[aktPos].textContent = '<';
+    document.getElementById('axis2Position').value = pos.x + "/" + pos.y;
+    
+    manageFields("rueckwaerts");
+    maleRoboterArm(true);
 }
 
 function vorheriegePosition() {
-    if(aktPos > 0) {
-        
-        aktPos--;
-        var pos = positionen[aktPos];
+    aktivZellen[aktPos].textContent = '';
 
-        aktivZellen[aktPos + 1].textContent = '';
-        aktivZellen[aktPos].textContent = '<';
-        document.getElementById('axis2Position').value = pos.x + "/" + pos.y;
-        
-        manageFields("rueckwaarts");
-        maleRoboterArm();
+    if(aktPos > 0) {
+        aktPos--;
     }
+    else {
+        aktPos = positionen.length - 2;
+    }
+    var pos = positionen[aktPos];
+
+    aktivZellen[aktPos].textContent = '<';
+    document.getElementById('axis2Position').value = pos.x + "/" + pos.y;
+    
+    manageFields("rueckwaerts");
+    maleRoboterArm(false);
 }

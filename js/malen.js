@@ -1,6 +1,3 @@
-// globale variablen für den roboterarm und verschiedene radien
-let arm;
-
 // radien von den kreisen
 let r1 = 20;
 let r2 = 10;
@@ -13,21 +10,12 @@ let r3x = 0;
 let r3y = 0;
 
 // funktion zum zeichnen des roboterarms
-function maleRoboterArm(changeR3 = true) {
+function maleRoboterArm(moveForward = true) {
     // die benötigte elemente einblenden
     document.getElementById("positionsContainer").style.display = "block";
     document.getElementById("canvasContainer").style.display = "block";
 
-    // holen der werte aus den eingabefeldern
-    let l1 = parseFloat(document.getElementById("axis1Length").value);
-    let w1 = parseFloat(document.getElementById("axis1Angle").value);
-    let p1 = document.getElementById("axis1Position").value;
-    let l2 = parseFloat(document.getElementById("axis2Length").value);
-    let w2 = parseFloat(document.getElementById("axis2Angle").value);
-    let p2 = document.getElementById("axis2Position").value;
-
-    // erstellen eines neuen roboterarm-objekts
-    arm = new Roboterarm(l1, w1, p1, l2, w2, p2);
+    console.log(roboterarm);
 
     // einstellungen für den zeichenkontext
     c = document.getElementById("canvas");
@@ -36,46 +24,38 @@ function maleRoboterArm(changeR3 = true) {
     // anpassung der canvasgröße an die größe des html-elements
     c.width = c.clientWidth;
     c.height = c.clientHeight;
+    ctx.translate(c.width / 2, c.height / 2);
 
     // löschen des canvas-inhalts
     ctx.clearRect(0, 0, c.width, c.height);
+    ctx.scale(0.8, 0.8);
 
-    // einstellen der farben
     ctx.fillStyle = "yellow";
     ctx.strokeStyle = "black";
 
-    // anpassung des koordinatensystems
-    ctx.translate(100, 100);
-    ctx.scale(0.8, 0.8);
-
-    if(changeR3) {
-        r3x = arm.getP1x() - l1 * Math.cos(w1 * (Math.PI / 180));
-        r3y = arm.getP1y() + l1 * Math.sin(w1 * (Math.PI / 180));
-    }
-
-    if(Math.abs(calculateDistance(r3x, r3y, arm.getP1x(), arm.getP1y()) - l1) > 10 ||
-        Math.abs(calculateDistance(arm.getP1x(), arm.getP1y(), arm.getP2x(), arm.getP2y()) - l2) > 10) {
+    if(Math.abs(calculateDistance(r3x, r3y, roboterarm.getP1x(), roboterarm.getP1y()) - roboterarm.getL1()) > 20 ||
+        Math.abs(calculateDistance(roboterarm.getP1x(), roboterarm.getP1y(), roboterarm.getP2x(), roboterarm.getP2y()) - roboterarm.getL2()) > 20) {
             document.getElementById("error").style.display = "block";
-            nachstePosition();
+            moveForward ? nachstePosition() : vorheriegePosition;
             return 0;
     }
 
     // zeichnen der teile des roboterarms
-    maleRechtecken(r3x, r3y, arm.getP1x(), arm.getP1y(), r1);
-    maleLinien(r3x, r3y, arm.getP1x(), arm.getP1y());
+    maleRechtecken(r3x, r3y, roboterarm.getP1x(), roboterarm.getP1y(), r1);
+    maleLinien(r3x, r3y, roboterarm.getP1x(), roboterarm.getP1y());
 
-    maleRechtecken(arm.getP1x(), arm.getP1y(), arm.getP2x(), arm.getP2y(), r2);
-    maleLinien(arm.getP1x(), arm.getP1y(), arm.getP2x(), arm.getP2y());
+    maleRechtecken(roboterarm.getP1x(), roboterarm.getP1y(), roboterarm.getP2x(), roboterarm.getP2y(), r2);
+    maleLinien(roboterarm.getP1x(), roboterarm.getP1y(), roboterarm.getP2x(), roboterarm.getP2y());
 
     // zeichnen der kreise an den gelenken
     maleKreis(r3x, r3y, r3);
-    maleKreis(arm.getP1x(), arm.getP1y(), r1);
-    maleKreis(arm.getP2x(), arm.getP2y(), r2);
+    maleKreis(roboterarm.getP1x(), roboterarm.getP1y(), r1);
+    maleKreis(roboterarm.getP2x(), roboterarm.getP2y(), r2);
 
     ctx.fillStyle = "black";
     ctx.fillText(`(${r3x.toFixed(2)}, ${r3y.toFixed(2)})`, r3x, r3y);
-    ctx.fillText(`(${arm.getP1x().toFixed(2)}, ${arm.getP1y().toFixed(2)})`, arm.getP1x(), arm.getP1y());
-    ctx.fillText(`(${arm.getP2x().toFixed(2)}, ${arm.getP2y().toFixed(2)})`, arm.getP2x(), arm.getP2y());
+    ctx.fillText(`(${roboterarm.getP1x().toFixed(2)}, ${roboterarm.getP1y().toFixed(2)})`, roboterarm.getP1x(), roboterarm.getP1y());
+    ctx.fillText(`(${roboterarm.getP2x().toFixed(2)}, ${roboterarm.getP2y().toFixed(2)})`, roboterarm.getP2x(), roboterarm.getP2y());
 }
 
 

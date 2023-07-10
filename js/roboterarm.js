@@ -1,15 +1,14 @@
 class Roboterarm {
     // konstruktor, um den roboterarm mit spezifischen eigenschaften zu initialisieren
    constructor(l1, w1, p1, l2, w2, p2) {
-       document.getElementById("error").style.display = "none"; // fehler am anfang nicht angezeigt
-
-       // die werte setzen
-       this.setL1(l1);
-       this.setW1(w1);
-       this.setP1(p1);
-       this.setL2(l2);
-       this.setW2(w2);
-       this.setP2(p2);
+        document.getElementById("error").style.display = "none";
+        // die werte setzen
+        this.setL1(l1);
+        this.setW1(w1);
+        this.setP1(p1);
+        this.setL2(l2);
+        this.setW2(w2);
+        this.setP2(p2);
    }
 
    // get methoden zur rückgabe von werten
