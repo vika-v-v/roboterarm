@@ -33,14 +33,13 @@ function erstelleTabelle() {
     positionsContainer.appendChild(table);
 }
 
-// funktion zum wechseln zur nächsten position
 function nachstePosition() {
     if(aktPos < positionen.length - 1) {
-        aktivZellen[aktPos].textContent = '';
         aktPos++;
-        aktivZellen[aktPos].textContent = '<';
-
         var pos = positionen[aktPos];
+        
+        aktivZellen[aktPos - 1].textContent = '';
+        aktivZellen[aktPos].textContent = '<';
         document.getElementById('axis2Position').value = pos.x + "/" + pos.y;
         
         manageFields("rueckwaerts");
@@ -48,17 +47,17 @@ function nachstePosition() {
     }
 }
 
-// funktion zum wechseln zur vorherigen position
 function vorheriegePosition() {
     if(aktPos > 0) {
-        aktivZellen[aktPos].textContent = '';
+        
         aktPos--;
-        aktivZellen[aktPos].textContent = '<';
-
         var pos = positionen[aktPos];
+
+        aktivZellen[aktPos + 1].textContent = '';
+        aktivZellen[aktPos].textContent = '<';
         document.getElementById('axis2Position').value = pos.x + "/" + pos.y;
         
-        manageFields("rueckwaerts");
+        manageFields("rueckwaarts");
         maleRoboterArm();
     }
 }

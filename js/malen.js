@@ -9,18 +9,21 @@ let r3 = 40;
 let c; // canvas
 let ctx; // context
 
+let r3x = 0;
+let r3y = 0;
+
 // funktion zum zeichnen des roboterarms
-function maleRoboterArm() {
+function maleRoboterArm(changeR3 = true) {
     // die benötigte elemente einblenden
     document.getElementById("positionsContainer").style.display = "block";
     document.getElementById("canvasContainer").style.display = "block";
 
     // holen der werte aus den eingabefeldern
-    let l1 = document.getElementById("axis1Length").value;
-    let w1 = document.getElementById("axis1Angle").value;
+    let l1 = parseFloat(document.getElementById("axis1Length").value);
+    let w1 = parseFloat(document.getElementById("axis1Angle").value);
     let p1 = document.getElementById("axis1Position").value;
-    let l2 = document.getElementById("axis2Length").value;
-    let w2 = document.getElementById("axis2Angle").value;
+    let l2 = parseFloat(document.getElementById("axis2Length").value);
+    let w2 = parseFloat(document.getElementById("axis2Angle").value);
     let p2 = document.getElementById("axis2Position").value;
 
     // erstellen eines neuen roboterarm-objekts
@@ -45,9 +48,18 @@ function maleRoboterArm() {
     ctx.translate(100, 100);
     ctx.scale(0.8, 0.8);
 
-    let r3x = arm.getP1x() - l1 * Math.cos(w1 * (Math.PI / 180));
-    let r3y = arm.getP1y() + l1 * Math.sin(w1 * (Math.PI / 180));
-    
+    if(changeR3) {
+        r3x = arm.getP1x() - l1 * Math.cos(w1 * (Math.PI / 180));
+        r3y = arm.getP1y() + l1 * Math.sin(w1 * (Math.PI / 180));
+    }
+
+    if(Math.abs(calculateDistance(r3x, r3y, arm.getP1x(), arm.getP1y()) - l1) > 10 ||
+        Math.abs(calculateDistance(arm.getP1x(), arm.getP1y(), arm.getP2x(), arm.getP2y()) - l2) > 10) {
+            document.getElementById("error").style.display = "block";
+            nachstePosition();
+            return 0;
+    }
+
     // zeichnen der teile des roboterarms
     maleRechtecken(r3x, r3y, arm.getP1x(), arm.getP1y(), r1);
     maleLinien(r3x, r3y, arm.getP1x(), arm.getP1y());
@@ -61,10 +73,11 @@ function maleRoboterArm() {
     maleKreis(arm.getP2x(), arm.getP2y(), r2);
 
     ctx.fillStyle = "black";
-    ctx.fillText(`(${r3x}, ${r3y})`, r3x, r3y);
+    ctx.fillText(`(${r3x.toFixed(2)}, ${r3y.toFixed(2)})`, r3x, r3y);
     ctx.fillText(`(${arm.getP1x().toFixed(2)}, ${arm.getP1y().toFixed(2)})`, arm.getP1x(), arm.getP1y());
     ctx.fillText(`(${arm.getP2x().toFixed(2)}, ${arm.getP2y().toFixed(2)})`, arm.getP2x(), arm.getP2y());
 }
+
 
 // funktion zum zeichnen von kreisen
 function maleKreis(x, y, r) {
@@ -105,4 +118,10 @@ function maleRechtecken(x1, y1, x2, y2, h) {
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
+}
+
+function calculateDistance(x1, y1, x2, y2) {
+    var dx = x2 - x1;
+    var dy = y2 - y1;
+    return Math.sqrt(dx * dx + dy * dy);
 }
