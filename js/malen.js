@@ -45,34 +45,32 @@ function maleRoboterArm() {
     ctx.translate(100, 100);
     ctx.scale(0.8, 0.8);
 
+    let r3x = arm.getP1x() - l1 * Math.cos(w1 * (Math.PI / 180));
+    let r3y = arm.getP1y() + l1 * Math.sin(w1 * (Math.PI / 180));
+    
     // zeichnen der teile des roboterarms
-    maleRechtecken(c.width / 2, c.height / 2, arm.getP1x(), arm.getP1y(), r1);
-    maleLinien(c.width / 2, c.height / 2, arm.getP1x(), arm.getP1y());
+    maleRechtecken(r3x, r3y, arm.getP1x(), arm.getP1y(), r1);
+    maleLinien(r3x, r3y, arm.getP1x(), arm.getP1y());
 
     maleRechtecken(arm.getP1x(), arm.getP1y(), arm.getP2x(), arm.getP2y(), r2);
     maleLinien(arm.getP1x(), arm.getP1y(), arm.getP2x(), arm.getP2y());
 
     // zeichnen der kreise an den gelenken
-    maleKreisen();
+    maleKreis(r3x, r3y, r3);
+    maleKreis(arm.getP1x(), arm.getP1y(), r1);
+    maleKreis(arm.getP2x(), arm.getP2y(), r2);
+
+    ctx.fillStyle = "black";
+    ctx.fillText(`(${r3x}, ${r3y})`, r3x, r3y);
+    ctx.fillText(`(${arm.getP1x().toFixed(2)}, ${arm.getP1y().toFixed(2)})`, arm.getP1x(), arm.getP1y());
+    ctx.fillText(`(${arm.getP2x().toFixed(2)}, ${arm.getP2y().toFixed(2)})`, arm.getP2x(), arm.getP2y());
 }
 
 // funktion zum zeichnen von kreisen
-function maleKreisen() {
+function maleKreis(x, y, r) {
     // zeichnen des zentralen kreises
     ctx.beginPath();
-    ctx.arc(c.width / 2, c.height / 2, r3, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.stroke();
-
-    // zeichnen des ersten gelenkkreises
-    ctx.beginPath();
-    ctx.arc(arm.getP1x(), arm.getP1y(), r1, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.stroke();
-
-    // zeichnen des zweiten gelenkkreises
-    ctx.beginPath();
-    ctx.arc(arm.getP2x(), arm.getP2y(), r2, 0, 2 * Math.PI);
+    ctx.arc(x, y, r, 0, 2 * Math.PI);
     ctx.fill();
     ctx.stroke();
 }
