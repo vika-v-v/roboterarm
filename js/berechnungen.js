@@ -10,7 +10,7 @@ function manageFields(value = mode) {
     let l1 = parseFloat(document.getElementById('axis1Length').value);
     let w1 = parseFloat(document.getElementById('axis1Angle').value);
     let l2 = parseFloat(document.getElementById('axis2Length').value);
-    let w2 = parseFloat(document.getElementById('axis2Angle').value);
+    let w2 = 90 - parseFloat(document.getElementById('axis2Angle').value);
     let p1 = document.getElementById('axis1Position').value;
     let p2 = document.getElementById('axis2Position').value;
 
