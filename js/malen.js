@@ -29,17 +29,20 @@ function maleRoboterArm(moveForward = true) {
 
     // löschen des canvas-inhalts
     ctx.clearRect(0, 0, c.width, c.height);
-    ctx.scale(0.8, 0.8);
+    
+    if(Math.abs(calculateDistance(r3x, r3y, roboterarm.getP1x(), roboterarm.getP1y()) - roboterarm.getL1()) > 20 ||
+    Math.abs(calculateDistance(roboterarm.getP1x(), roboterarm.getP1y(), roboterarm.getP2x(), roboterarm.getP2y()) - roboterarm.getL2()) > 20) {
+        document.getElementById("error").style.display = "block";
+        moveForward ? nachstePosition() : vorheriegePosition();
+        return 0;
+    }
+    
+    ctx.beginPath();
+    ctx.arc(80, 80, 80, 0, 2 * Math.PI);
+    ctx.stroke();
 
     ctx.fillStyle = "yellow";
     ctx.strokeStyle = "black";
-
-    if(Math.abs(calculateDistance(r3x, r3y, roboterarm.getP1x(), roboterarm.getP1y()) - roboterarm.getL1()) > 20 ||
-        Math.abs(calculateDistance(roboterarm.getP1x(), roboterarm.getP1y(), roboterarm.getP2x(), roboterarm.getP2y()) - roboterarm.getL2()) > 20) {
-            document.getElementById("error").style.display = "block";
-            moveForward ? nachstePosition() : vorheriegePosition();
-            return 0;
-    }
 
     // zeichnen der teile des roboterarms
     maleRechtecken(r3x, r3y, roboterarm.getP1x(), roboterarm.getP1y(), r1);
