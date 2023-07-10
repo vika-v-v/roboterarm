@@ -11,6 +11,7 @@ let r3y = 0;
 
 // funktion zum zeichnen des roboterarms
 function maleRoboterArm(moveForward = true) {
+    
     // die benötigte elemente einblenden
     document.getElementById("positionsContainer").style.display = "block";
     document.getElementById("canvasContainer").style.display = "block";
@@ -36,7 +37,7 @@ function maleRoboterArm(moveForward = true) {
     if(Math.abs(calculateDistance(r3x, r3y, roboterarm.getP1x(), roboterarm.getP1y()) - roboterarm.getL1()) > 20 ||
         Math.abs(calculateDistance(roboterarm.getP1x(), roboterarm.getP1y(), roboterarm.getP2x(), roboterarm.getP2y()) - roboterarm.getL2()) > 20) {
             document.getElementById("error").style.display = "block";
-            moveForward ? nachstePosition() : vorheriegePosition;
+            moveForward ? nachstePosition() : vorheriegePosition();
             return 0;
     }
 
@@ -52,10 +53,11 @@ function maleRoboterArm(moveForward = true) {
     maleKreis(roboterarm.getP1x(), roboterarm.getP1y(), r1);
     maleKreis(roboterarm.getP2x(), roboterarm.getP2y(), r2);
 
-    ctx.fillStyle = "black";
-    ctx.fillText(`(${r3x.toFixed(2)}, ${r3y.toFixed(2)})`, r3x, r3y);
-    ctx.fillText(`(${roboterarm.getP1x().toFixed(2)}, ${roboterarm.getP1y().toFixed(2)})`, roboterarm.getP1x(), roboterarm.getP1y());
-    ctx.fillText(`(${roboterarm.getP2x().toFixed(2)}, ${roboterarm.getP2y().toFixed(2)})`, roboterarm.getP2x(), roboterarm.getP2y());
+    // ausgeben koordinaten zur prüfung
+    //ctx.fillStyle = "black";
+    //ctx.fillText(`(${r3x.toFixed(2)}, ${r3y.toFixed(2)})`, r3x, r3y);
+    //ctx.fillText(`(${roboterarm.getP1x().toFixed(2)}, ${roboterarm.getP1y().toFixed(2)})`, roboterarm.getP1x(), roboterarm.getP1y());
+    //ctx.fillText(`(${roboterarm.getP2x().toFixed(2)}, ${roboterarm.getP2y().toFixed(2)})`, roboterarm.getP2x(), roboterarm.getP2y());
 }
 
 
