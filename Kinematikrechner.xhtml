@@ -32,11 +32,11 @@
                     <h5>Achse 1</h5>
                     <div class="input-group">
                         <label for="axis1Length">Achse 1 Länge: </label>
-                        <input type="number" id="axis1Length" min="0" oninput="manageFields()" />
+                        <input type="number" id="axis1Length" min="0" />
                     </div>
                     <div class="input-group">
                         <label for="axis1Angle">Achse 1 Winkel: </label>
-                        <input type="number" id="axis1Angle" min="0" max="360" oninput="manageFields()" />
+                        <input type="number" id="axis1Angle" min="0" max="360" />
                     </div>
                     <div class="input-group">
                         <label for="axis1Position">Achse 1 Position (x/y): </label>
@@ -47,15 +47,15 @@
                     <h5>Achse 2</h5>
                     <div class="input-group">
                         <label for="axis2Length">Achse 2 Länge: </label>
-                        <input type="number" id="axis2Length" min="0" oninput="manageFields()" />
+                        <input type="number" id="axis2Length" min="0" />
                     </div>
                     <div class="input-group">
                         <label for="axis2Angle">Achse 2 Winkel: </label>
-                        <input type="number" id="axis2Angle" min="0" max="360" oninput="manageFields()" />
+                        <input type="number" id="axis2Angle" min="0" max="360" />
                     </div>
                     <div class="input-group">
                         <label for="axis1Position">Achse 2 Position (x/y): </label>
-                        <input type="text" id="axis2Position" oninput="manageFields()" />
+                        <input type="text" id="axis2Position" />
                     </div>
 
                 </div>
@@ -72,7 +72,7 @@
                         <label for="inverseKinematics">Rückwärtskinematik</label>
                     </div>
 
-                    <button id="calculate" onclick="maleRoboterArm()">Berechnung starten</button>
+                    <button id="calculate" onclick="manageFields(); maleRoboterArm()">Berechnung starten</button>
                     <button id="nextPosition" onclick="nachstePosition()">Nächste Position aus der Tabelle</button>
                     <button id="previousPosition" onclick="vorheriegePosition()">Vorherige Position aus der Tabelle</button>
                 </div>
@@ -87,7 +87,7 @@
             </div>
 
             <!-- container für die tabelle mit den positionen -->
-            <div id = "positionsContainer">
+            <div id = "positionsContainer" style="display: none;">
                 <table id="positions">
                     <tr>
                         <th>#</th>
@@ -98,7 +98,7 @@
             </div>
 
             <!-- container für canvas -->
-            <div id="canvasContainer">
+            <div id="canvasContainer" style="display: none;">
                 <canvas id="canvas"></canvas>
             </div>
 

@@ -11,6 +11,10 @@ let ctx; // context
 
 // funktion zum zeichnen des roboterarms
 function maleRoboterArm() {
+    // die benötigte elemente einblenden
+    document.getElementById("positionsContainer").style.display = "block";
+    document.getElementById("canvasContainer").style.display = "block";
+
     // holen der werte aus den eingabefeldern
     let l1 = document.getElementById("axis1Length").value;
     let w1 = document.getElementById("axis1Angle").value;

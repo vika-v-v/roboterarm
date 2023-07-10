@@ -13,7 +13,7 @@ function erstelleTabelle() {
 
         // erstelle eine zelle für die nummerierung
         var numCell = document.createElement('td');
-        numCell.innerHTML = "<i>" + (i + 1) + "</i>";
+        numCell.innerHTML = "<i>" + i + "</i>";
         row.appendChild(numCell);
 
         // erstelle eine zelle für die position

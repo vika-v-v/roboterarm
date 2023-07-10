@@ -38,7 +38,7 @@ function manageFields(value = mode) {
 
         // erstellen eines neuen roboterarm-objekts
         let ra = new Roboterarm(data1[2], data1[3], data1[0] + "/" + data1[1], data2[2], data2[3], data2[0] + "/" + data2[1]);
-
+        console.log(ra);
         // aktualisieren der positionsfelder mit den berechneten werten
         document.getElementById('axis1Position').value = ra.getP1();
         document.getElementById('axis2Position').value = ra.getP2();
@@ -46,7 +46,7 @@ function manageFields(value = mode) {
     // überprüfen, ob der modus 'rueckwaerts' ist
     else if (value === 'rueckwaerts') {
         // aktivieren der positionsfelder
-        document.getElementById('axis1Position').disabled = false;
+        document.getElementById('axis1Position').disabled = true;
         document.getElementById('axis2Position').disabled = false;
         // deaktivieren der winkelfelder
         document.getElementById('axis1Angle').disabled = true;
