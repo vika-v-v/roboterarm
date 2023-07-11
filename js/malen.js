@@ -11,7 +11,7 @@ let r3y = 0;
 
 // funktion zum zeichnen des roboterarms
 function maleRoboterArm(moveForward = true) {
-    
+
     // die benötigte elemente einblenden
     document.getElementById("positionsContainer").style.display = "block";
     document.getElementById("canvasContainer").style.display = "block";
@@ -29,6 +29,9 @@ function maleRoboterArm(moveForward = true) {
 
     // löschen des canvas-inhalts
     ctx.clearRect(0, 0, c.width, c.height);
+
+    if(document.getElementById("error").style.display == "none") {
+    
     
     if(Math.abs(calculateDistance(r3x, r3y, roboterarm.getP1x(), roboterarm.getP1y()) - roboterarm.getL1()) > 20 ||
     Math.abs(calculateDistance(roboterarm.getP1x(), roboterarm.getP1y(), roboterarm.getP2x(), roboterarm.getP2y()) - roboterarm.getL2()) > 20) {
@@ -61,6 +64,7 @@ function maleRoboterArm(moveForward = true) {
     //ctx.fillText(`(${r3x.toFixed(2)}, ${r3y.toFixed(2)})`, r3x, r3y);
     //ctx.fillText(`(${roboterarm.getP1x().toFixed(2)}, ${roboterarm.getP1y().toFixed(2)})`, roboterarm.getP1x(), roboterarm.getP1y());
     //ctx.fillText(`(${roboterarm.getP2x().toFixed(2)}, ${roboterarm.getP2y().toFixed(2)})`, roboterarm.getP2x(), roboterarm.getP2y());
+}
 }
 
 
